@@ -50,7 +50,6 @@ const getAll = async (): Promise<TimeEntry[]> => {
     //TODO redo this, very imperative
 
     timeEntries.sort((a, b) => {
-        console.log(a.time.getTime())
         if (a.time < b.time) {
             return 1;
         }

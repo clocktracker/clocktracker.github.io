@@ -40,7 +40,7 @@
         Log
         <br>
         <template is="dom-repeat" items="[[timeEntries]]">
-            <div>[[item.type]]: [[item.time]]</div>
+            <div>[[item.type]]: [[formatTime(item.time)]]</div>
         </template>
     </template>
 

@@ -30,6 +30,10 @@ class TTTimeTracker {
         await Actions.calculateTotalTime(this);
     }
 
+    formatTime(time: Date) {
+        return moment(time).format('MMMM Do YYYY, h:mm:ss a');
+    }
+
     mapStateToThis(e) {
         const state = e.detail.state;
 
