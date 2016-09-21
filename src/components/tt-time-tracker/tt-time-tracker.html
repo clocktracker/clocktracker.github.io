@@ -4,11 +4,37 @@
 
 <dom-module id="tt-time-tracker">
     <template>
+        <style>
+            /*:host {
+                --paper-toggle-button-checked-bar: {
+                    width: 500px;
+                    height: 500px;
+                };
+
+                --paper-toggle-button-unchecked-bar: {
+                    width: 500px;
+                    height: 500px;
+                };
+
+                --paper-toggle-button-checked-button: {
+                    width: 250px;
+                    height: 500px;
+                };
+
+                --paper-toggle-button-unchecked-button: {
+                    width: 250px;
+                    height: 500px;
+                };
+            }*/
+        </style>
+
         <redux-store action="[[action]]" on-statechange="mapStateToThis"></redux-store>
 
-        <paper-toggle-button id="toggleButton" on-change="toggleClick" checked="[[toggled]]">
-            [[inOrOut]]
-        </paper-toggle-button>
+        <div>
+            <paper-toggle-button id="toggleButton" on-change="toggleClick" checked="[[toggled]]">
+                [[inOrOut]]
+            </paper-toggle-button>
+        </div>
         Total time: [[totalTime]]
         <br>
         Log

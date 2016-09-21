@@ -42,9 +42,25 @@ const getAll = async (): Promise<TimeEntry[]> => {
     const timeEntries: TimeEntry[] = [];
     for (let i=0; i < keys.length; i++) {
         const timeEntry = await localforage.getItem(keys[i]);
-        timeEntries.push(timeEntry);
+
+        if (typeof timeEntry !== 'boolean') { //TODO evil, the structure of the data in the database is causing this
+            timeEntries.push(timeEntry);
+        }
     }
     //TODO redo this, very imperative
+
+    timeEntries.sort((a, b) => {
+        console.log(a.time.getTime())
+        if (a.time < b.time) {
+            return 1;
+        }
+
+        if (a.time > b.time) {
+            return -1;
+        }
+
+        return 0;
+    });
 
     return timeEntries;
 };
