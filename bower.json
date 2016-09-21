@@ -1,0 +1,20 @@
+{
+  "name": "cs340timetracker.github.io",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Jordan Last <jordan.michael.last@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/cs340timetracker/cs340timetracker.github.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.6.1"
+  }
+}
