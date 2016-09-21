@@ -1,10 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../tt-time-tracker/tt-time-tracker.html">
+<link rel="import" href="../../bower_components/redux-store-element/redux-store.html">
 
 <dom-module id="tt-app">
     <template>
+        <redux-store root-reducer="[[rootReducer]]"></redux-store>
+
         <tt-time-tracker></tt-time-tracker>
     </template>
 
-    <script src="tt-app.ts"></script>
+    <script>System.import('/src/components/tt-app/tt-app.ts')</script>
 </dom-module>

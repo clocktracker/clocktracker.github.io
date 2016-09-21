@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "es-no-build": "^0.1.0"
+    "localforage": "^1.4.2"
   }
 }

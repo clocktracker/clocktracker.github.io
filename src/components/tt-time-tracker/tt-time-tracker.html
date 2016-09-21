@@ -1,9 +1,22 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/redux-store-element/redux-store.html">
 
 <dom-module id="tt-time-tracker">
     <template>
-        the time tracker
+        <redux-store action="[[action]]" on-statechange="mapStateToThis"></redux-store>
+
+        <paper-toggle-button id="toggleButton" on-change="toggleClick">
+            [[inOrOut]]
+        </paper-toggle-button>
+        Total time: [[totalTime]]
+        <br>
+        Log
+        <br>
+        <template is="dom-repeat" items="[[timeEntries]]">
+            <div>[[item.type]]: [[item.time]]</div>
+        </template>
     </template>
 
-    <script src="tt-time-tracker.ts"></script>
+    <script>System.import('/src/components/tt-time-tracker/tt-time-tracker.ts')</script>
 </dom-module>
