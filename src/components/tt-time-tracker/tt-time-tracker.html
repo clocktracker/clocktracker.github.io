@@ -6,7 +6,7 @@
     <template>
         <redux-store action="[[action]]" on-statechange="mapStateToThis"></redux-store>
 
-        <paper-toggle-button id="toggleButton" on-change="toggleClick">
+        <paper-toggle-button id="toggleButton" on-change="toggleClick" checked="[[toggled]]">
             [[inOrOut]]
         </paper-toggle-button>
         Total time: [[totalTime]]

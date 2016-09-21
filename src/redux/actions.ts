@@ -1,10 +1,27 @@
 import {TimeEntryModel} from '../models/time-entry-model.ts';
 
+const initializeClockInOrOut = async (context: any) => {
+    const clockedIn: boolean = await TimeEntryModel.getClockedIn();
+
+    if (clockedIn) {
+        context.action = {
+            type: 'SET_CLOCK_IN'
+        };
+    }
+    else {
+        context.action = {
+            type: 'SET_CLOCK_OUT'
+        };
+    }
+};
+
 const clockIn = async (context: any) => {
     await TimeEntryModel.create({
         type: 'CLOCK IN',
         time: new Date()
     });
+
+    await TimeEntryModel.setClockedIn();
 
     context.action = {
         type: 'SET_CLOCK_IN'
@@ -16,6 +33,8 @@ const clockOut = async (context: any) => {
         type: 'CLOCK OUT',
         time: new Date()
     });
+
+    await TimeEntryModel.setClockedOut();
 
     context.action = {
         type: 'SET_CLOCK_OUT'
@@ -41,5 +60,6 @@ export const Actions = {
     clockIn,
     clockOut,
     loadTimeEntries,
-    calculateTotalTime
+    calculateTotalTime,
+    initializeClockInOrOut
 };

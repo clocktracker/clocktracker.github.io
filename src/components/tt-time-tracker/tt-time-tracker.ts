@@ -2,11 +2,18 @@ import {Actions} from '../../redux/actions.ts';
 
 class TTTimeTracker {
     public inOrOut;
+    public toggled;
     public totalTime;
     public timeEntries;
 
     beforeRegister() {
         this.is = 'tt-time-tracker';
+    }
+
+    async ready() {
+        await Actions.initializeClockInOrOut(this);
+        await Actions.loadTimeEntries(this);
+        await Actions.calculateTotalTime(this);
     }
 
     async toggleClick(e) {
@@ -27,6 +34,7 @@ class TTTimeTracker {
         const state = e.detail.state;
 
         this.inOrOut = state.inOrOut;
+        this.toggled = state.inOrOut === 'IN' ? true : false;
         this.totalTime = state.totalTime;
         this.timeEntries = state.timeEntries;
     }

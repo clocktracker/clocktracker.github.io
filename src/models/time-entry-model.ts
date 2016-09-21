@@ -4,6 +4,18 @@ import {TimeEntry} from '../typings/time-entry.ts';
 
 const dataPath = 'timeEntries'; //TODO figure out how to create a hierarchy to the data, with an API similar to Firebase
 
+const getClockedIn = async () => {
+    return await localforage.getItem('clockedIn');
+};
+
+const setClockedIn = async () => {
+    await localforage.setItem('clockedIn', true);
+};
+
+const setClockedOut = async () => {
+    await localforage.setItem('clockedIn', false);
+};
+
 const create = async (timeEntry: TimeEntry): Promise<string> => {
     const id = UtilitiesService.createUUID();
     const newTimeEntry = Object.assign({}, timeEntry, {
@@ -40,5 +52,8 @@ const getAll = async (): Promise<TimeEntry[]> => {
 export const TimeEntryModel = {
     create,
     save,
-    getAll
+    getAll,
+    getClockedIn,
+    setClockedIn,
+    setClockedOut
 };
