@@ -1,5 +1,7 @@
 export const InitialState = {
-    totalTime: '',
+    totalHours: 0,
+    totalMinutes: 0,
+    totalSeconds: 0,
     inOrOut: '',
     timeEntries: []
 };

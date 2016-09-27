@@ -19,7 +19,7 @@ export const RootReducer = (state=InitialState, action) => {
         }
         case 'CALCULATE_TOTAL_TIME': {
             const newState = Object.assign({}, state);
-            newState.totalTime = newState.timeEntries.reduce((prev, curr, index, array) => {
+            const totalMilliseconds = newState.timeEntries.reduce((prev, curr, index, array) => {
 
                 if (typeof curr === 'boolean') {
                     return prev;
@@ -36,15 +36,18 @@ export const RootReducer = (state=InitialState, action) => {
                 const currentTime = curr.time;
                 const nextTime = array[index + 1].time;
 
-                const currentTimeMilliseconds = currentTime.getMilliseconds();
-                const nextTimeMilliseconds = nextTime.getMilliseconds();
+                const currentTimeMilliseconds = currentTime.getTime();
+                const nextTimeMilliseconds = nextTime.getTime();
 
-                const differenceInMilliseconds = nextTimeMilliseconds - currentTimeMilliseconds;
-
-                console.log(differenceInMilliseconds);
+                const differenceInMilliseconds = currentTimeMilliseconds - nextTimeMilliseconds;
 
                 return prev + differenceInMilliseconds;
-            }, 0) / 1000;
+            }, 0);
+
+            newState.totalHours = Math.floor((totalMilliseconds / 1000 / 60 / 60) % 24);
+            newState.totalMinutes = Math.floor((totalMilliseconds / 1000 / 60) % 60);
+            newState.totalSeconds = Math.floor((totalMilliseconds / 1000) % 60);
+
             return newState;
         }
         default: {

@@ -1,9 +1,11 @@
 import {Actions} from '../../redux/actions.ts';
 
 class TTTimeTracker {
-    public inOrOut;
-    public toggled;
-    public totalTime;
+    public inOrOut: 'IN' | 'OUT';
+    public toggled: boolean;
+    public totalHours: number;
+    public totalMinutes: number;
+    public totalSeconds: number;
     public timeEntries;
 
     beforeRegister() {
@@ -39,7 +41,9 @@ class TTTimeTracker {
 
         this.inOrOut = state.inOrOut;
         this.toggled = state.inOrOut === 'IN' ? true : false;
-        this.totalTime = state.totalTime;
+        this.totalHours = state.totalHours;
+        this.totalMinutes = state.totalMinutes;
+        this.totalSeconds = state.totalSeconds;
         this.timeEntries = state.timeEntries;
     }
 }
