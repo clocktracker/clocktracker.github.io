@@ -19,7 +19,5 @@
   "devDependencies": {
     "http-server": "^0.9.0"
   },
-  "dependencies": {
-    "es-no-build": "^0.1.0"
-  }
+  "dependencies": {}
 }
