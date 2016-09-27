@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/redux-store-element/redux-store.html">
 
 <dom-module id="tt-time-tracker">
@@ -26,21 +27,42 @@
                     height: 500px;
                 };
             }*/
+
+            .green-text {
+                color: green;
+            }
+
+            .red-text {
+                color: red;
+            }
+
+            paper-button.green {
+                background-color: var(--paper-green-500);
+            }
+
+            paper-button.red {
+                background-color: var(--paper-red-500);
+            }
         </style>
 
         <redux-store action="[[action]]" on-statechange="mapStateToThis"></redux-store>
 
-        <div>
-            <paper-toggle-button id="toggleButton" on-change="toggleClick" checked="[[toggled]]">
-                [[inOrOut]]
-            </paper-toggle-button>
+        <div style="margin-top: 25px; display: flex; flex-direction: row; align-items: center; justify-content: center">
+            <div style="display: flex; flex-direction: column;">
+                <h1 class$="[[statusClass(toggled)]]">[[inOrOut]]</h1>
+
+                <h2>Total time: [[totalHours]] hours, [[totalMinutes]] minutes, [[totalSeconds]] seconds</h2>
+
+                <paper-button class$="[[inClass(toggled)]]" disabled="[[toggled]]" raised on-tap="clockIn">IN</paper-button>
+                <paper-button class$="[[outClass(toggled)]]" disabled="[[!toggled]]" raised on-tap="clockOut">OUT</paper-button>
+
+                <br>
+
+                <template is="dom-repeat" items="[[timeEntries]]">
+                    <div>[[item.type]]: [[formatTime(item.time)]]</div>
+                </template>
+            </div>
         </div>
-        Total time: [[totalHours]] hours, [[totalMinutes]] minutes, [[totalSeconds]] seconds
-        <br>
-        <br>
-        <template is="dom-repeat" items="[[timeEntries]]">
-            <div>[[item.type]]: [[formatTime(item.time)]]</div>
-        </template>
     </template>
 
     <script>System.import('/src/components/tt-time-tracker/tt-time-tracker.ts')</script>

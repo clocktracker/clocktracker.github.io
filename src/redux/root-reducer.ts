@@ -4,12 +4,12 @@ export const RootReducer = (state=InitialState, action) => {
     switch (action.type) {
         case 'SET_CLOCK_IN': {
             const newState = Object.assign({}, state);
-            newState.inOrOut = 'IN';
+            newState.inOrOut = 'CLOCKED IN';
             return newState;
         }
         case 'SET_CLOCK_OUT': {
             const newState = Object.assign({}, state);
-            newState.inOrOut = 'OUT';
+            newState.inOrOut = 'CLOCKED OUT';
             return newState;
         }
         case 'SET_TIME_ENTRIES': {
