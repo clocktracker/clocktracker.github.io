@@ -56,6 +56,12 @@ const calculateTotalTime = (context: any) => {
     };
 };
 
+const setOriginalTotalTime = (context: any) => {
+    context.action = {
+        type: 'SET_ORIGINAL_TOTAL_TIME'
+    };
+};
+
 const liveUpdateTotalTime = (context: any) => {
     context.action = {
         type: 'LIVE_UPDATE_TOTAL_TIME'
@@ -68,5 +74,6 @@ export const Actions = {
     loadTimeEntries,
     calculateTotalTime,
     initializeClockInOrOut,
-    liveUpdateTotalTime
+    liveUpdateTotalTime,
+    setOriginalTotalTime
 };

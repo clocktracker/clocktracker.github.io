@@ -20,22 +20,24 @@ class TTTimeTracker {
         Actions.initializeClockInOrOut(this);
         await Actions.loadTimeEntries(this);
         Actions.calculateTotalTime(this);
+        Actions.setOriginalTotalTime(this);
 
-        // if (this.inOrOut === 'CLOCKED IN') {
-        //     //Actions.liveUpdateTotalTime(this);
-        // }
-        //
-        // setInterval(() => {
-        //     if (this.inOrOut === 'CLOCKED IN') {
-        //         Actions.liveUpdateTotalTime(this);
-        //     }
-        // }, 1000);
+        if (this.inOrOut === 'CLOCKED IN') {
+            Actions.liveUpdateTotalTime(this);
+        }
+
+        setInterval(() => {
+            if (this.inOrOut === 'CLOCKED IN') {
+                Actions.liveUpdateTotalTime(this);
+            }
+        }, 1000);
     }
 
     async clockIn(e: Event) {
         await Actions.clockIn(this);
         await Actions.loadTimeEntries(this);
         Actions.calculateTotalTime(this);
+        Actions.setOriginalTotalTime(this);
     }
 
     async clockOut(e: Event) {
