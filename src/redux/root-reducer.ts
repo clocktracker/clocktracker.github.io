@@ -48,6 +48,30 @@ export const RootReducer = (state=InitialState, action) => {
             newState.totalMinutes = Math.floor((totalMilliseconds / 1000 / 60) % 60);
             newState.totalSeconds = Math.floor((totalMilliseconds / 1000) % 60);
 
+            if (!newState.originalTotalHours) {
+                newState.originalTotalHours = totalMilliseconds / 1000 / 60 / 60;
+            }
+
+            if (!newState.originalTotalMinutes) {
+                newState.originalTotalMinutes = totalMilliseconds / 1000 / 60;
+            }
+
+            if (!newState.originalTotalSeconds) {
+                newState.originalTotalSeconds = totalMilliseconds / 1000;
+            }
+
+            return newState;
+        }
+        case 'LIVE_UPDATE_TOTAL_TIME': {
+            const newState = Object.assign({}, state);
+
+            const lastClockIn = newState.timeEntries.find((timeEntry) => timeEntry.type === 'CLOCK IN');
+            const totalMilliseconds = (new Date()).getTime() - lastClockIn.time.getTime();
+
+            newState.totalHours = Math.floor((newState.originalTotalHours + (totalMilliseconds / 1000 / 60 / 60)) % 24);
+            newState.totalMinutes = Math.floor((newState.originalTotalMinutes + (totalMilliseconds / 1000 / 60)) % 60);
+            newState.totalSeconds = Math.floor((newState.originalTotalSeconds + (totalMilliseconds / 1000)) % 60);
+
             return newState;
         }
         default: {

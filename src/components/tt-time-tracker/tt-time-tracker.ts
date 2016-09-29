@@ -1,45 +1,58 @@
+declare var moment: any;
+
 import {Actions} from '../../redux/actions.ts';
+import {TimeEntry} from '../../typings/time-entry.ts';
 
 class TTTimeTracker {
+    public is: string;
     public inOrOut: 'CLOCKED IN' | 'CLOCKED OUT';
     public toggled: boolean;
     public totalHours: number;
     public totalMinutes: number;
     public totalSeconds: number;
-    public timeEntries;
+    public timeEntries: TimeEntry[];
 
     beforeRegister() {
         this.is = 'tt-time-tracker';
     }
 
     async ready() {
-        this.green = 'green';
-        await Actions.initializeClockInOrOut(this);
+        Actions.initializeClockInOrOut(this);
         await Actions.loadTimeEntries(this);
-        await Actions.calculateTotalTime(this);
+        Actions.calculateTotalTime(this);
+
+        // if (this.inOrOut === 'CLOCKED IN') {
+        //     //Actions.liveUpdateTotalTime(this);
+        // }
+        //
+        // setInterval(() => {
+        //     if (this.inOrOut === 'CLOCKED IN') {
+        //         Actions.liveUpdateTotalTime(this);
+        //     }
+        // }, 1000);
     }
 
-    async clockIn(e) {
+    async clockIn(e: Event) {
         await Actions.clockIn(this);
         await Actions.loadTimeEntries(this);
-        await Actions.calculateTotalTime(this);
+        Actions.calculateTotalTime(this);
     }
 
-    async clockOut(e) {
+    async clockOut(e: Event) {
         await Actions.clockOut(this);
         await Actions.loadTimeEntries(this);
-        await Actions.calculateTotalTime(this);
+        Actions.calculateTotalTime(this);
     }
 
-    inClass(toggled) {
+    inClass(toggled: boolean) {
         return toggled ? '' : 'green';
     }
 
-    outClass(toggled) {
+    outClass(toggled: boolean) {
         return toggled ? 'red' : '';
     }
 
-    statusClass(toggled) {
+    statusClass(toggled: boolean) {
         return toggled ? 'green-text' : 'red-text';
     }
 
@@ -47,7 +60,7 @@ class TTTimeTracker {
         return moment(time).format('MMMM Do YYYY, h:mm:ss a');
     }
 
-    mapStateToThis(e) {
+    mapStateToThis(e: Event) {
         const state = e.detail.state;
 
         this.inOrOut = state.inOrOut;

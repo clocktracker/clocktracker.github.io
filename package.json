@@ -20,6 +20,6 @@
     "http-server": "^0.9.0"
   },
   "dependencies": {
-    "es-no-build": "^0.1.0"
+    "es-no-build": "^0.2.3"
   }
 }
